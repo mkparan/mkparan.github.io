@@ -127,6 +127,59 @@
   }
 
   /**
+   *  animated text
+   */
+
+  window.onload = function () {
+    playText1(); // Play animation for Mark Kenth
+    playText2(); // Play animation for Paran
+  };
+
+  function playText1() {
+    var text = "Mark Kenth";
+    var textElement = document.getElementById("animatedText");
+    var possibleChars = '-+*/|}{[]~\\":;?/.><=+-_)(*&^%$#@!)}';
+
+    function animateText(i, currentText) {
+      setTimeout(function () {
+        textElement.textContent = currentText;
+      }, i * 200); // Increased the delay to 200ms per step for slower animation
+    }
+
+    for (var i = 0; i <= text.length; i++) {
+      let currentText = text.substr(0, i);
+      for (var j = i; j < text.length; j++) {
+        currentText += possibleChars.charAt(
+          Math.floor(Math.random() * possibleChars.length)
+        );
+      }
+      animateText(i, currentText);
+    }
+  }
+
+  function playText2() {
+    var text = "Paran";
+    var textElement = document.getElementById("animatedText2");
+    var possibleChars = '-+*/|}{[]~\\":;?/.><=+-_)(*&^%$#@!)}';
+
+    function animateText(i, currentText) {
+      setTimeout(function () {
+        textElement.textContent = currentText;
+      }, i * 200); // Increased the delay to 200ms per step for slower animation
+    }
+
+    for (var i = 0; i <= text.length; i++) {
+      let currentText = text.substr(0, i);
+      for (var j = i; j < text.length; j++) {
+        currentText += possibleChars.charAt(
+          Math.floor(Math.random() * possibleChars.length)
+        );
+      }
+      animateText(i, currentText);
+    }
+  }
+
+  /**
    * Init swiper sliders
    */
   function initSwiper() {
