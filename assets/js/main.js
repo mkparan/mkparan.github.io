@@ -180,6 +180,50 @@
   }
 
   /**
+   * Bg animation
+   */
+
+  const state = {
+    fps: 6, // Set FPS to 6
+    color: "#c70606", // Set color to #c70606
+    charset: "01", // Set the charset to "01"
+    size: 10, // Set size to 10
+  };
+
+  const canvas = document.getElementById("canvas");
+  const ctx = canvas.getContext("2d");
+
+  let w, h, p;
+  const resize = () => {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+
+    p = Array(Math.ceil(w / state.size)).fill(0);
+  };
+
+  window.addEventListener("resize", resize);
+  resize();
+
+  const random = (items) => items[Math.floor(Math.random() * items.length)];
+
+  const draw = () => {
+    ctx.fillStyle = "rgba(29, 29, 29, 0.05)"; // Set a slightly transparent black to give fading effect
+    ctx.fillRect(0, 0, w, h); // Cover the entire canvas
+
+    ctx.fillStyle = state.color; // Set text color
+    ctx.font = state.size + "px monospace";
+
+    for (let i = 0; i < p.length; i++) {
+      let v = p[i];
+      ctx.fillText(random(state.charset), i * state.size, v);
+      p[i] = v >= h || v >= 10000 * Math.random() ? 0 : v + state.size;
+    }
+  };
+
+  // Set the FPS to 6
+  let interval = setInterval(draw, 1000 / state.fps);
+
+  /**
    * Init swiper sliders
    */
   function initSwiper() {
